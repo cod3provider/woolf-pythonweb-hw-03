@@ -4,7 +4,7 @@ from pathlib import Path
 import urllib.parse
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from datetime import datetime
-from helper import add_response_to_db
+from helper import save_to_db
 from jinja2 import Environment, FileSystemLoader
 
 BASE_DIR = Path(__file__).parent
@@ -40,7 +40,7 @@ class Handler(BaseHTTPRequestHandler):
         messages = {}
         timestamp = datetime.now().isoformat()
         messages[timestamp] = r
-        add_response_to_db(messages, data_file)
+        save_to_db(messages, data_file)
         self.send_response(302)
         self.send_header('Location', '/')
         self.end_headers()
